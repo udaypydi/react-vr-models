@@ -1,0 +1,70 @@
+{
+  "name": "scapic_assignment",
+  "version": "1.0.0",
+  "description": "vr objects store",
+  "main": "index.js",
+  "scripts": {
+    "test": "",
+    "webpack-watch": "webpack -w --mode development",
+    "express-server": "node server.js",
+    "dev": "concurrent --kill-others \"npm run webpack-watch\" \"npm run express-server\"",
+    "build": "webpack --mode production"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "react",
+      "stage-0"
+    ],
+    "plugins": [
+      "transform-decorators-legacy",
+      "transform-object-rest-spread",
+      "transform-es2015-destructuring"
+    ],
+    "env": {
+      "debug": true
+    }
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aframe": "^0.8.2",
+    "aframe-animation-component": "^4.2.0",
+    "aframe-bmfont-text-component": "^0.1.4",
+    "aframe-event-set-component": "^4.1.1",
+    "aframe-particle-system-component": "^1.0.11",
+    "aframe-react": "^4.4.0",
+    "express": "^4.16.3",
+    "mongodb": "^3.0.10",
+    "prop-types": "^15.6.2",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0",
+    "semantic-ui-react": "^0.81.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-decorators-legacy": "^1.3.5",
+    "babel-plugin-transform-es2015-destructuring": "^6.23.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "concurrently": "^3.6.0",
+    "css-loader": "^0.28.11",
+    "directory-named-webpack-plugin": "^4.0.0",
+    "file-loader": "^1.1.11",
+    "html-webpack-plugin": "^3.2.0",
+    "image-webpack-loader": "^4.3.1",
+    "mtl-loader": "^0.2.0",
+    "style-loader": "^0.21.0",
+    "webpack": "^4.12.0",
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.4",
+    "webpack-obj-loader": "^1.0.4"
+  }
+}

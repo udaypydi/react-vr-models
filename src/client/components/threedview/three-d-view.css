@@ -1,0 +1,9 @@
+.object-container {
+  flex: 1;
+  display: flex;
+  height: 300px;
+  width: 300px;
+  background: rgba(0, 0, 0);
+  position: 'absolute';
+  top: 0;
+}

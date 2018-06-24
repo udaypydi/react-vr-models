@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Modal, Icon, Header } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import 'aframe';
 import 'aframe-particle-system-component';
-import { Entity, Scene } from 'aframe-react';
 
 import { HomePageActions } from '../../actions';
 import './three-d-view.css';
@@ -16,38 +14,24 @@ class ThreeDView extends Component {
     showModal: PropTypes.bool.isRequired,
   };
 
-  state = {
-    yRotation: 0,
-  }
-
-  handleModalClose = () => {
-    this.props.dispatch(HomePageActions.closeModal());
-  }
-
   renderObject = () => {
-    // this.updateRotation()
     return (
-    <Scene
-      background={{ color: 'rgba(0, 0, 0, 0.5)' }}
-      height={300}
-      width={300}
-    >
-      <a-assets>
-        <a-asset-item id="tree-obj" src={`/resources/obj/${this.props.objectData.object.obj}`}></a-asset-item>
-      </a-assets>
-      <Entity
-        obj-model="obj: #tree-obj;"
-        color="green"
-        intensity={1}
-        scale={{ x: 0.5, y: 0.5, z: 0.5 }}
-        position={{ x: 0, y: -3, z: -15}}
-        rotation={`0 0 0`}
-        vive-controls={{hand: 'left'}}
-        vr-mode-ui="enabled: false"
-      />
-      <Entity particle-system={{preset: 'snow', particleCount: 5000 }}  cursor-listener />
-      <Entity light={{type: 'point'}}/>
-    </Scene>
+      <a-scene embedded>
+        <a-assets>
+          <a-asset-item id="tree-obj" src={`/resources/obj/${this.props.objectData.object.obj}`}></a-asset-item>
+        </a-assets>
+        <a-entity obj-model="obj: #tree-obj;" position="0 0 -20"></a-entity>
+        <a-animation 
+          attribute="rotation"
+          dur="10000"
+          fill="forwards"
+          to="0 360 0"
+          repeat="indefinite"
+        >
+        </a-animation>
+        <a-light type="ambient" color="#445451"></a-light>
+        <a-light type="point" intensity="2" position="2 4 4"></a-light>
+      </a-scene>
     )
   };
 
@@ -59,9 +43,7 @@ class ThreeDView extends Component {
     const { objectData, showModal } = this.props;
 
     return (
-      <div className='object-container'>
-        <Header>{`3D view of a ${objectData.object.name}`}</Header>
-        <Icon name='close' onClick={this.handleModalClose} />
+      <div>
         {this.renderObject()}
       </div>
     )

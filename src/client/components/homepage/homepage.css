@@ -3,6 +3,11 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
+  font-size: 40px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .test-image {
   width: 100%;

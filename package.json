@@ -8,7 +8,8 @@
     "webpack-watch": "webpack -w --mode development",
     "express-server": "node server.js",
     "dev": "concurrent --kill-others \"npm run webpack-watch\" \"npm run express-server\"",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "heroku-postbuild": "yarn && yarn dev"
   },
   "babel": {
     "presets": [

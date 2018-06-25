@@ -11,16 +11,16 @@ class ThreeDView extends Component {
   static propTypes = {
     objectData: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
-    showModal: PropTypes.bool.isRequired,
   };
 
   renderObject = () => {
     return (
       <a-scene embedded>
         <a-assets>
-          <a-asset-item id="tree-obj" src={`/resources/obj/${this.props.objectData.object.obj}`}></a-asset-item>
+          <a-asset-item id="tree-obj" src={this.props.objectData.object.obj}></a-asset-item>
+          <a-asset-item id="tree-mtl" src={this.props.objectData.object.mtl}></a-asset-item>
         </a-assets>
-        <a-entity obj-model="obj: #tree-obj;" position="0 0 -20"></a-entity>
+        <a-entity obj-model="obj: #tree-obj; mtl: #tree-mtl" position="0 0 -20"></a-entity>
         <a-animation 
           attribute="rotation"
           dur="10000"
@@ -40,18 +40,22 @@ class ThreeDView extends Component {
   }
 
   render() {
-    const { objectData, showModal } = this.props;
-
+    const { objectData } = this.props;
     return (
       <div>
-        {this.renderObject()}
+        {objectData && Object.keys(objectData).length > 0 &&
+          <div>
+            {this.renderObject()}
+            <h1>{`3D View of a ${objectData.object.name}`}</h1>
+          </div>
+        }
       </div>
     )
   }
 }
 
 const mapStateToProps = (store) => ({
-  showModal: store.homePage.showModal,
+  objectData: store.homePage.clickedObjectMetaData,
 });
 
 export default connect(mapStateToProps)(ThreeDView);

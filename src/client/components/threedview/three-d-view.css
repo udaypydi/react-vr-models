@@ -13,3 +13,9 @@ a-scene {
   top: 0;
   right: 0;
 }
+
+.zoom-button-container {
+  position: absolute;
+  z-index: 10000;
+  top: 0;
+}

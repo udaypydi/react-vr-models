@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Button, Icon } from 'semantic-ui-react';
 import 'aframe';
 import 'aframe-particle-system-component';
 
@@ -13,6 +14,10 @@ class ThreeDView extends Component {
     dispatch: PropTypes.func.isRequired,
   };
 
+  state={
+    axisZoom: 0.5,
+  };
+
   renderObject = () => {
     return (
       <a-scene embedded>
@@ -20,23 +25,19 @@ class ThreeDView extends Component {
           <a-asset-item id="tree-obj" src={this.props.objectData.object.obj}></a-asset-item>
           <a-asset-item id="tree-mtl" src={this.props.objectData.object.mtl}></a-asset-item>
         </a-assets>
-        <a-entity obj-model="obj: #tree-obj; mtl: #tree-mtl" position="0 0 -20"></a-entity>
-        <a-animation 
-          attribute="rotation"
-          dur="10000"
-          fill="forwards"
-          to="0 360 0"
-          repeat="indefinite"
-        >
-        </a-animation>
+        <a-entity obj-model="obj: #tree-obj; mtl: #tree-mtl" position="0 0 -20" scale={`${this.state.axisZoom} ${this.state.axisZoom} ${this.state.axisZoom}`}></a-entity>
         <a-light type="ambient" color="#445451"></a-light>
         <a-light type="point" intensity="2" position="2 4 4"></a-light>
       </a-scene>
     )
   };
 
-  updateRotation = () => {
-    setTimeout(() => { this.setState({ yRotation: this.state.yRotation + 10 })}, 200);
+  zoomZAxis = (type) => () => {
+    if(type === 'plus') {
+      this.setState({ axisZoom: this.state.axisZoom + 0.1 });
+    } else {
+      this.setState({ axisZoom: this.state.axisZoom - 0.1 });
+    }
   }
 
   render() {
@@ -46,7 +47,16 @@ class ThreeDView extends Component {
         {objectData && Object.keys(objectData).length > 0 &&
           <div>
             {this.renderObject()}
-            <h1>{`3D View of a ${objectData.object.name}`}</h1>
+            <div className='zoom-button-container'>
+              <Button.Group>
+                <Button icon onClick={this.zoomZAxis('plus')}>
+                  <Icon name='zoom'/>
+                </Button>
+                <Button icon onClick={this.zoomZAxis('minus')}>
+                  <Icon name='zoom out' />
+                </Button>
+              </Button.Group>
+            </div>
           </div>
         }
       </div>

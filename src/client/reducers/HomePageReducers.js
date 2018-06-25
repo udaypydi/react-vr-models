@@ -6,6 +6,7 @@ const initialState = {
   endIndex: 2,
   clickedObjectMetaData: null,
   showModal: false,
+  isLoading: true,
 };
 
 const HomePageReducers = (state = initialState, action) => {
@@ -17,7 +18,8 @@ const HomePageReducers = (state = initialState, action) => {
         ...state, 
         objectsData: [...objectsData, ...action.payload.data], 
         startIndex: action.payload.startIndex, 
-        endIndex: action.payload.endIndex 
+        endIndex: action.payload.endIndex,
+        isLoading: false,
       };
 
     case HomePageActionTypes.OBJECT_CLICKED:

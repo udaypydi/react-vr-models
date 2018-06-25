@@ -12,6 +12,7 @@ const CategoriesContainer = (props) => {
   CategoriesContainer.propTypes = {
     objectMetaData: PropTypes.object,
     dispatch: PropTypes.func.isRequired,
+    isLoading: PropTypes.bool.isRequired,
   };
 
   const handleObjectClick = (metaData, categoryName) => () => {
@@ -25,7 +26,7 @@ const CategoriesContainer = (props) => {
 
   const renderObjectCategories = () => (
     props.data.map((categories, index) => (
-      <Segment raised key={index}>
+      <Segment raised key={index} loading={props.isLoading}>
         <h1>{categories.name}</h1>
         <div className='object-categories-container'>
           {
@@ -51,6 +52,7 @@ const CategoriesContainer = (props) => {
 
 const mapStateToProps = (store) => ({
   objectMetaData: store.homePage.clickedObjectMetaData,
+  isLoading: store.homePage.isLoading,
 });
 
 export default connect(mapStateToProps)(CategoriesContainer);
